@@ -1,0 +1,461 @@
+openapi: 3.0.1
+info:
+  title: SaBo App - API Documentation
+  description: |-
+    This is our API Documentation for SaBo App. Provided by CC of C23-PS298 Capstone Team.
+  contact: {}
+  version: "1.0"
+servers:
+- url: https://sabo-backend.uc.r.appspot.com/
+tags:
+- name: Admin
+- name: User
+- name: CCTV
+
+paths:
+  /cctv:
+    get:
+      tags:
+        - CCTV
+      summary: 'Get a list of CCTV cameras'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      operationId: getcctv
+      responses:
+        '200':
+          description: successful
+  /cctv/{id}:
+    get:
+      tags:
+        - CCTV
+      summary: 'Get details of a specific CCTV camera by ID'
+      description: ''
+      operationId: getcctvbyid
+      parameters:
+        - name: token
+          in: header
+          description: authorization header
+          required: true
+          style: simple
+          explode: true
+          schema:
+           type: string
+        - name: id
+          in: path
+          description: 'id'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful
+  /cctv/getlocation:
+    get:
+      tags:
+        - CCTV
+      summary: 'Get locations list of CCTV cameras'
+      description: ''
+      operationId: cctvgetlocation
+      parameters:
+        - name: token
+          in: header
+          description: authorization header
+          required: true
+          style: simple
+          explode: true
+          schema:
+           type: string
+      responses:
+        '200':
+          description: successful
+  /cctv/userscctv:
+    get:
+      tags:
+        - CCTV
+      summary: 'Get a users who have access to the CCTV Location'
+      description: ''
+      operationId: pembimbingSkripsi
+      # parameters:
+        # - name: token
+        #   in: header
+        #   description: authorization header
+        #   required: true
+        #   style: simple
+        #   explode: true
+        #   schema:
+        #   type: string
+      responses:
+        '200':
+          description: successful
+  /cctv/create:
+    post:
+      tags:
+        - CCTV
+      summary: 'Create a new CCTV camera'
+      description: ''
+      security: []
+      operationId: createcctv
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cctv'
+      responses:
+        '201':
+          description: successful
+  /cctv/update:
+    put:
+      tags:
+        - CCTV
+      summary: 'Update cctv'
+      description: ''
+      security: []
+      operationId: updatecctv
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cctvid'
+      responses:
+        '201':
+          description: successful
+  /cctv/delete:
+    delete:
+      tags:
+        - CCTV
+      summary: 'Get a list of CCTV cameras'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      operationId: deletecctv
+      responses:
+        '200':
+          description: successful
+  /admin:
+    get:
+      tags:
+        - Admin
+      summary: 'Get a list of admin'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      operationId: getadmin
+      responses:
+        '200':
+          description: successful
+  /admin/login:
+    post:
+      tags:
+        - Admin
+      summary: 'Login admin'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin'
+      responses:
+        '200':
+          description: successful
+  /admin/createadmin:
+    post:
+      tags:
+        - Admin
+      summary: 'Signin admin'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin'
+      responses:
+        '201':
+          description: successful
+  /admin/update:
+    put:
+      tags:
+        - Admin
+      summary: 'Update cctv'
+      description: ''
+      security: []
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin'
+      responses:
+        '201':
+          description: successful
+  /admin/delete:
+    delete:
+      tags:
+        - Admin
+      summary: 'Get a list of CCTV cameras'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      responses:
+        '200':
+          description: successful
+  /users:
+    get:
+      tags:
+        - User
+      summary: 'Get a list of users'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      responses:
+        '200':
+          description: successful
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: 'Get details of a specific user by ID'
+      description: ''
+      parameters:
+        - name: token
+          in: header
+          description: authorization header
+          required: true
+          style: simple
+          explode: true
+          schema:
+           type: string
+        - name: id
+          in: path
+          description: 'id'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful
+  /users/login:
+    post:
+      tags:
+        - User
+      summary: 'Login admin'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful
+  /users/createuser:
+    post:
+      tags:
+        - User
+      summary: 'Signup user'
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful
+  /users/update:
+    put:
+      tags:
+        - User
+      summary: 'Update user'
+      description: ''
+      parameters:
+        - name: token
+          in: header
+          description: authorization header
+          required: true
+          style: simple
+          explode: true
+          schema:
+           type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful
+  /users/deleteuser:
+    delete:
+      tags:
+        - User
+      summary: 'Delete user'
+      description: ''
+      parameters:
+       - name: token
+         in: header
+         description: authorization header
+         required: true
+         style: simple
+         explode: true
+         schema:
+           type: string
+      responses:
+        '200':
+          description: successful
+components:
+  schemas:
+    cctv:  # <--- example name
+      type: object
+      properties:
+        # vv Actual payload goes here vv
+        name:
+          type: string
+          format: string
+          example: cctv1
+        coordinate:
+          type: string
+          format: string
+          example: 60.3333
+        used:
+          type: boolean
+          format: boolean
+          example: 1
+        protocol:
+          type: string
+          format: string
+          example: RTMP
+        ip:
+          type: string
+          format: string
+          example: 192.168.1.1
+        remark:
+          type: string
+          format: string
+          example: perbatasan
+        location:
+          type: string
+          format: string
+          example: pos1
+    cctvid:  # <--- example name
+      type: object
+      properties:
+        # vv Actual payload goes here vv
+        id: 
+          type: integer
+          format: int64
+        name:
+          type: string
+          format: string
+          example: cctv1
+        coordinate:
+          type: string
+          format: string
+          example: 60.3333
+        used:
+          type: boolean
+          format: boolean
+          example: 1
+        protocol:
+          type: string
+          format: string
+          example: RTMP
+        ip:
+          type: string
+          format: string
+          example: 192.168.1.1
+        remark:
+          type: string
+          format: string
+          example: perbatasan
+        location:
+          type: string
+          format: string
+          example: pos1
+    admin:  # <--- example name
+      type: object
+      properties:
+        # vv Actual payload goes here vv
+        name:
+          type: string
+          format: string
+          example: ccbangkit
+        email:
+          type: string
+          format: string
+          example: cloudcomputing@sabo.com
+        password:
+          type: string
+          format: string
+          example: sabo
+    user:  # <--- example name
+      type: object
+      properties:
+        # vv Actual payload goes here vv
+        name:
+          type: string
+          format: string
+          example: ccbangkit
+        email:
+          type: string
+          format: string
+          example: cloudcomputing@sabo.com
+        password:
+          type: string
+          format: string
+          example: sabo
+        location:
+          type: string
+          format: string
+          example: pos1
